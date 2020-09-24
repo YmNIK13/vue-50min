@@ -5,13 +5,14 @@ import Home from '@/views/Home'
 Vue.use(Router) // регистрируем плагин роутера
 
 export default new Router({
-    mode: 'history',
-    routes: [{
-        path: '/',
-        component: Home
-    },{
-        path: '/todos',
-        component: () => import('./views/Todos')
-    },
+    mode: 'history', // чтоб работали стандартные роуты
+    routes: [
+        {
+            path: '/',
+            component: Home //либо так подключаем компонент
+        }, {
+            path: '/todos',
+            component: () => import('./views/Todos') // либо так
+        },
     ]
 })

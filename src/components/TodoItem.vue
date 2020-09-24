@@ -11,12 +11,12 @@
 
 <script>
     export default {
-        props: {
-            todo: { // валидируем тип полученных данных
+        props: {  // при валидации  уже передаются через объект
+            todo: {
                 type: Object,
                 required: true,
             },
-            index : Number
+            index : Number, // можно сходу указать тип
         }
     }
 </script>
