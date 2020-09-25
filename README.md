@@ -112,6 +112,25 @@ import TodoList from '@/components/TodoList'
 </style>
 ```
 
+Так же доступно использование препроцессоров:
+
+1. Необходимо установить библиотеку
+
+        npm i -D sass-loader sass
+
+2. И прописать в теге **style** атрибут  **lang="scss"**
+
+```vue
+<style lang="scss">
+$color: red;
+</style>
+```
+
+
+
+
+Подробней [тут](https://cli.vuejs.org/ru/guide/css.html#%D0%BF%D1%80%D0%B5-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%BE%D1%80%D1%8B)  
+
 
 ## Данные
 <a name="data" href="#top">Оглавление</a>
@@ -229,8 +248,8 @@ export default {
 ```
 
 
-## Условия отображения
-<a name="block_if" href="#top">Оглавление</a>
+## <a name="block_if">Условия отображения (v-if)</a>
+<a href="#top">Оглавление</a>
 
 Для отображения определенного вывода в темплейте используются атрибуты `v-if`, `v-else-if` и `v-else`.
 В первые два передаем условие для отображения. Конструкция работает на весь компонент и вложенных условий не предполагает 
@@ -242,8 +261,9 @@ export default {
 ```
 
 
-## Коллекции (for)
-<a name="block_for" href="#top">Оглавление</a>
+## <a name="block_for">Коллекции (v-for)</a>
+<a href="#top">Оглавление</a> || 
+<a name="block_for" href="https://ru.vuejs.org/v2/guide/list.html">Документация по **v-for**</a> 
 
 Если нам надо вывести коллекцию каких-то компонентов, то в самом компоненте, 
 который надо выводить при вызове указываем атрибут **v-for**
@@ -275,6 +295,11 @@ export default {
 
 ```vue
 <TodoItem @click="removeTodo" />
+```
+
+Можно запретить всплывающее событие через модификатор `prevent`
+```vue
+<form @submit.prevent="onSubmit">
 ```
 
 ### Обработчик
