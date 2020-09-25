@@ -59,7 +59,7 @@ import TodoList from '@/components/TodoList'
 
 2. Регистрируются в скрипте, в свойстве **components**
 
-```vue
+```js
 components: {
     TodoList,
 },
@@ -67,7 +67,7 @@ components: {
 
 3. Используются как и в React
 ```vue
-    <TodoList />
+<TodoList />
 ```
 
 ## Стили
@@ -94,7 +94,7 @@ components: {
 
 Для инициализации данных прописываем их в функцию **data()**
 
-```vue
+```js
 export default {
     name: 'App',
     data() {
@@ -108,9 +108,7 @@ export default {
 Для передачи данных в компонент исопльзуем тег **v-bind**
 
 ```vue
-<TodoList
-    v-bind:name_param="todos"
-/>
+<TodoList v-bind:name_param="todos" />
 ```
 где
  - `name_param` - это название пропса в компоненте
@@ -201,29 +199,27 @@ export default {
 
 Если нам надо создать вычисляемую переменную то в свойстве `computed` описываем функцию которая будет возвращать результат
 
-```vue
-<script>
-    export default {
-        data() {
-            return {
-                todos: [],
-            }
-        },
-        computed: {
-            filterTodos() { // используем как переменную вместо массива todos
-                if (this.filter === 'all') {
-                    return this.todos
-                }
-                if (this.filter === 'completed') {
-                    return this.todos.filter(t => t.completed)
-                }
-                if (this.filter === 'not-completed') {
-                    return this.todos.filter(t => !t.completed)
-                }
-            }
-        },
+```js
+export default {
+data() {
+    return {
+	todos: [],
     }
-</script>
+},
+computed: {
+    filterTodos() { // используем как переменную вместо массива todos
+	if (this.filter === 'all') {
+	    return this.todos
+	}
+	if (this.filter === 'completed') {
+	    return this.todos.filter(t => t.completed)
+	}
+	if (this.filter === 'not-completed') {
+	    return this.todos.filter(t => !t.completed)
+	}
+    }
+},
+}
 ```
 
 а в самом темплейте используем название функции как переменную
@@ -237,40 +233,34 @@ export default {
 
 Подписаться на событие элемента можно через атрибут **v-on:** 
 ```vue
-<TodoItem
-    v-on:click="removeTodo"
-/>
+<TodoItem v-on:click="removeTodo" />
 ```
 а дальше, после двоеточия, указываем название события и указываем обработчик.
 
 Так же есть сокращенный тип привязки событий
 
 ```vue
-<TodoItem
-    @click="removeTodo"
-/>
+<TodoItem @click="removeTodo" />
 ```
 
 ### Обработчик
 
 Все обработчики регистрируем в свойстве **methods**
 
-```vue
-<script>
-    export default {        
-        methods: {
-            removeTodo(id) {
-                this.$emit('remove-todo', id)
-            }
+```js
+export default {        
+    methods: {
+        removeTodo(id) {
+    	    this.$emit('remove-todo', id)
         }
     }
-</script>
+}
 ``` 
 
 ### Свое событие
 
 События создаются через объект `$emit` который можно вызвать через `this` в коде
-```vue
+```js
 this.$emit('remove-todo', todo.id)
 ```
 
@@ -285,7 +275,7 @@ this.$emit('remove-todo', todo.id)
 ## Хуки
 
 если что-то надо сделать до создания компонента то прописываем это в функцию `mounted`
-```vue
+```js
 export default {
     name: 'App',
     data() {
