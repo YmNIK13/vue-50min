@@ -300,6 +300,8 @@ export default {
 Можно запретить всплывающее событие через модификатор `prevent`
 ```vue
 <form @submit.prevent="onSubmit">
+    // ...
+</form>
 ```
 
 ### Обработчик
