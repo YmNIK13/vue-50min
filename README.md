@@ -177,21 +177,19 @@ export default {
 где нам надо создать функцию с таким же названием как и переменная, в данном случае `title()` 
 и одним аргументом, куда будет попадать значение после изменений
 
-```vue
-<script>
-    export default {
-        data() {
-            return {
-                title: '',
-            }
-        },
-	    watch: {
-            title(value) {
-
-            }
-	    },
-    }
-</script>
+```js
+export default {
+    data() {
+        return {
+            title: '',
+        }
+    },
+    watch: {
+        title(value) { 
+            // ...
+        }
+    },
+}
 ```
 
 ## <a name="computed_fields"></a> Вычисляемые поля 
