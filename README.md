@@ -197,6 +197,40 @@ export default {
 </script>
 ```
 
+## Вычисляемые поля 
+
+Если нам надо создать вычисляемую переменную то в свойстве `computed` описываем функцию которая будет возвращать результат
+
+```vue
+<script>
+    export default {
+        data() {
+            return {
+                todos: [],
+            }
+        },
+        computed: {
+            filterTodos() { // используем как переменную вместо массива todos
+                if (this.filter === 'all') {
+                    return this.todos
+                }
+                if (this.filter === 'completed') {
+                    return this.todos.filter(t => t.completed)
+                }
+                if (this.filter === 'not-completed') {
+                    return this.todos.filter(t => !t.completed)
+                }
+            }
+        },
+    }
+</script>
+```
+
+а в самом темплейте используем название функции как переменную
+```vue
+<TodoList v-bind:todos="filterTodos" />
+```
+
 ## События
 
 ### Подписаться
