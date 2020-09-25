@@ -39,16 +39,37 @@ npm run build
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 <br>
-<br>
 
 ------------
 
-<br>
-<br>
 
 # Пояснения
 
-## Компоненты
+## Оглавление
+
+ 
+1. Основы
+   - [Компоненты](#components);
+   - [Стили](#style);
+  
+2. Работа с данными
+   - [Данные](#data);
+   - [Модели (Связь данных с компонентом)](#models);
+   - [Вычисляемые поля](#computed_fields);
+
+3. Конструкции
+   - [Условия отображения](#block_if);
+   - [Коллекции (for)](#block_for);
+
+4. Поведение
+   - [События](#event);
+   - [Жизненный цикл](#action);
+
+5. Роутинг
+   - [Роутинг](#router). 
+ 
+
+## <a name="components"></a>  Компоненты
 
 1. Импортируются
     
@@ -59,10 +80,14 @@ import TodoList from '@/components/TodoList'
 
 2. Регистрируются в скрипте, в свойстве **components**
 
-```js
-components: {
-    TodoList,
-},
+```vue
+<script>
+    export default {
+        components: {
+            TodoList,
+        }
+    }
+</script>
 ```
 
 3. Используются как и в React
@@ -70,7 +95,7 @@ components: {
 <TodoList />
 ```
 
-## Стили
+## <a name="style"></a> Стили
 
 Стили помещаются в тег **style** в каждом компоненте. 
 
@@ -79,16 +104,16 @@ components: {
 
 ```vue
 <style scoped>
-	ul {
-		margin: 0;
-		padding: 0;
-	}
+    ul {
+        margin: 0;
+        padding: 0;
+    }
 </style>
 ```
 
 
 
-## Данные
+## <a name="data"></a> Данные
 
 По сути это **props** в React
 
@@ -140,34 +165,8 @@ export default {
 </script>
 ```
 
-## Коллекции
 
-Если нам надо выввести коллекцию каких-то компонентов, то в самом компоненте, 
-который надо выводить при вызове указываем атрибут **v-for**
-
-```vue
-<TodoItem
-    v-for="(todo, i) of todos"
-    v-bind:todo="todo"
-    v-bind:index="i"
-/>
-``` 
-
-в значении **v-for** указываем имя переменной передаваемого элемента `todo` и индекса `i` , 
-которые мы передаем в виде **props** через **v-bind** уже с именами  `todo` и `index`
-
-## Условия отображения
-
-Для отображения определенного вывода в темплейте используются атрибуты `v-if`, `v-else-if` и `v-else`.
-В первые два передаем условие для отображения. Конструкция работает на весь компонент и вложенных условий не предполагает 
-
-```vue
-<Loader v-if="loading" />
-<TodoList v-else-if="todos.length" />
-<p v-else>No todo!</p>
-```
-
-## Связь данных с компонентом 
+## <a name="models"></a> Модели (Связь данных с компонентом) 
 Осуществляется через атрибут `v-model` , куда передаем переменную для связи
 
 ```vue
@@ -195,30 +194,30 @@ export default {
 </script>
 ```
 
-## Вычисляемые поля 
+## <a name="computed_fields"></a> Вычисляемые поля 
 
 Если нам надо создать вычисляемую переменную то в свойстве `computed` описываем функцию которая будет возвращать результат
 
 ```js
 export default {
-data() {
-    return {
-	todos: [],
-    }
-},
-computed: {
-    filterTodos() { // используем как переменную вместо массива todos
-	if (this.filter === 'all') {
-	    return this.todos
-	}
-	if (this.filter === 'completed') {
-	    return this.todos.filter(t => t.completed)
-	}
-	if (this.filter === 'not-completed') {
-	    return this.todos.filter(t => !t.completed)
-	}
-    }
-},
+    data() {
+        return {
+            todos: [],
+        }
+    },
+    computed: {
+        filterTodos() { // используем как переменную вместо массива todos
+        if (this.filter === 'all') {
+            return this.todos
+        }
+        if (this.filter === 'completed') {
+            return this.todos.filter(t => t.completed)
+        }
+        if (this.filter === 'not-completed') {
+            return this.todos.filter(t => !t.completed)
+        }
+        }
+    },
 }
 ```
 
@@ -227,7 +226,37 @@ computed: {
 <TodoList v-bind:todos="filterTodos" />
 ```
 
-## События
+
+## <a name="block_if"></a> Условия отображения
+
+Для отображения определенного вывода в темплейте используются атрибуты `v-if`, `v-else-if` и `v-else`.
+В первые два передаем условие для отображения. Конструкция работает на весь компонент и вложенных условий не предполагает 
+
+```vue
+<Loader v-if="loading" />
+<TodoList v-else-if="todos.length" />
+<p v-else>No todo!</p>
+```
+
+
+## <a name="block_for"></a> Коллекции (for)
+
+Если нам надо вывести коллекцию каких-то компонентов, то в самом компоненте, 
+который надо выводить при вызове указываем атрибут **v-for**
+
+```vue
+<TodoItem
+    v-for="(todo, i) of todos"
+    v-bind:todo="todo"
+    v-bind:index="i"
+/>
+``` 
+
+в значении **v-for** указываем имя переменной передаваемого элемента `todo` и индекса `i` , 
+которые мы передаем в виде **props** через **v-bind** уже с именами  `todo` и `index`
+
+
+## <a name="event"></a> События
 
 ### Подписаться
 
@@ -272,9 +301,9 @@ this.$emit('remove-todo', todo.id)
 в обоих случаях, мы при клике зарегистрируем событие `remove-todo` в которое будет передана переменная `todo.id`
 
 
-## Хуки
+## <a name="action"></a> Хуки
 
-если что-то надо сделать до создания компонента то прописываем это в функцию `mounted`
+если что-то надо сделать до создания компонента - прописываем это в функцию `mounted`
 ```js
 export default {
     name: 'App',
@@ -296,7 +325,7 @@ export default {
 В данном случае мы получаем json и сохраняем его в массив `todos`
 
 
-## Роутинг
+## <a name="router"></a> Роутинг
 
 Для роутинга необходима библиотека 
     
