@@ -228,15 +228,15 @@ export default {
     },
     computed: {
         filterTodos() { // используем как переменную вместо массива todos
-        if (this.filter === 'all') {
-            return this.todos
-        }
-        if (this.filter === 'completed') {
-            return this.todos.filter(t => t.completed)
-        }
-        if (this.filter === 'not-completed') {
-            return this.todos.filter(t => !t.completed)
-        }
+            if (this.filter === 'all') {
+                return this.todos
+            }
+            if (this.filter === 'completed') {
+                return this.todos.filter(t => t.completed)
+            }
+            if (this.filter === 'not-completed') {
+                return this.todos.filter(t => !t.completed)
+            }
         }
     },
 }
