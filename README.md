@@ -62,7 +62,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 4. Поведение
    - [События](#event);
-   - [Жизненный цикл](#action);
+   - [Жизненный цикл](#lifecycle);
+   - [Хуки](#action);
 
 5. Роутинг
    - [Роутинг](#router). 
@@ -331,6 +332,11 @@ this.$emit('remove-todo', todo.id)
 <button class="rm" v-on:click="$emit('remove-todo', todo.id)">&times;</button>
 ```
 в обоих случаях, мы при клике зарегистрируем событие `remove-todo` в которое будет передана переменная `todo.id`
+
+## Жизненный цикл
+<a name="lifecycle" href="#top">Оглавление</a>
+
+[Жизненный цикл](https://ru.vuejs.org/images/lifecycle.png)
 
 
 ## Хуки
